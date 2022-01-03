@@ -1,0 +1,28 @@
+ void smallRotation(int *a,int *b,int *c,int *d)
+{
+   int temp;
+   temp=*a;
+   *a=*d;
+   *d=*c;
+   *c=*b;
+   *b=temp;
+}
+void rotate(vector<vector<int> >& matrix)
+{
+    // Your code goes here
+      int circle=matrix.size()-1;
+   int start=0, end=circle,temp,a;
+   if(circle == 0)
+   return;
+   
+   for(;start<end;start++,end--)
+   {
+       a=end;
+       for(temp=start;temp<end;temp++)
+       {
+           
+           smallRotation(&matrix[start][temp],&matrix[a][start],&matrix[end][a],&matrix[temp][end]);
+           a--;
+       }
+   }
+}
