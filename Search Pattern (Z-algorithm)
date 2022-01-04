@@ -1,0 +1,24 @@
+vector <int> search(string pat, string txt)
+        {
+            //code hee.
+            string s = pat + "#" + txt;
+        int n = s.length();
+        vector<int> lps(n);
+        for(int i=1;i<n;i++){
+            int j = lps[i-1];
+            while(j>0 and s[j]!=s[i]){
+                j = lps[j-1];
+            }
+            if(s[i]==s[j]){
+                j++;
+            }
+            lps[i] = j;
+        }
+        vector<int> ans;
+        for(int i=pat.length()+1;i<n;i++){
+            if(lps[i]==pat.length()){
+                ans.push_back(i-pat.length()-pat.length()+1);
+            }
+        }
+        return ans;
+        }
