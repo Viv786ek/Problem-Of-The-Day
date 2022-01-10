@@ -1,0 +1,29 @@
+
+ 
+
+void get(Node* head,int &carry){
+       if(head->next==NULL){
+           int sum=head->data+carry;
+           head->data=sum%10;
+           carry=sum/10;
+           return;
+       }
+       get(head->next,carry);
+       if(carry==1){
+           int sum=head->data+carry;
+           head->data=sum%10;
+           carry=sum/10;
+       }
+   }
+   
+   Node* addOne(Node *head) 
+   {
+       int carry=1;
+       get(head,carry);
+       if(carry==1){
+           Node* extra=new Node(1);
+           extra->next=head;
+           return extra;
+       }
+       return head;
+   }
