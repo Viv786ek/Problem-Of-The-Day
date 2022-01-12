@@ -1,0 +1,61 @@
+ void preorder(Node* root,vector<int>& arr){
+        if(root==nullptr){
+            arr.push_back(INT_MAX);
+            return;
+        }
+        arr.push_back(root->data);
+        preorder(root->left,arr);
+        preorder(root->right,arr);
+    }
+    
+    void inorder(Node* root,vector<int>& arr){
+        if(root==nullptr){
+            arr.push_back(INT_MAX);
+            return;
+        }
+        inorder(root->left,arr);
+        arr.push_back(root->data);
+        inorder(root->right,arr);
+    }
+    
+    // check if s2 is a substring of s1 or not?
+    bool check(vector<int>& s1,vector<int>& s2){
+        int n = s1.size(),m = s2.size();
+        vector<int> str(s2.begin(),s2.end());
+        str.push_back(INT_MIN);
+        for(int i=0;i<n;i++){
+            str.push_back(s1[i]);
+        }
+        int N = str.size();
+        vector<int> lps(N);
+        for(int i=1;i<N;i++){
+            int j = lps[i-1];
+            while(j>0 and str[i]!=str[j]){
+                j = lps[j-1];
+            }
+            if(str[i]==str[j]){
+                j++;
+            }
+            lps[i] = j;
+        }
+        
+        for(int i=m+1;i<N;i++){
+            if(lps[i]==m){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    bool isSubTree(Node* T, Node* S) 
+    {
+        vector<int> in_t,in_s;
+        vector<int> pre_t,pre_s;
+        preorder(T,pre_t);
+        preorder(S,pre_s);
+        inorder(T,in_t);
+        inorder(S,in_s);
+        
+        return check(pre_t,pre_s) and check(in_t,in_s);
+    }
+    };
