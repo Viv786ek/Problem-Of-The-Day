@@ -1,0 +1,31 @@
+class Solution
+{
+  public:
+    string newIPAdd (string s)
+    {
+        //code here.
+        string sr;
+        bool flag=true;
+        bool chk=true;
+        for(int i=0;i<s.length();i++)
+        {
+            if(!(s[i]=='0' && flag))
+            {
+                flag=false;
+                if(s[i]=='.' && chk)
+                sr+=s[i-1];
+                sr+=s[i];
+                chk=false;
+            }
+            
+            if(s[i]=='.')
+            {
+                flag=true;
+                chk=true;
+            }
+        }
+        if(chk)
+        sr+=s[s.length()-1];
+        return sr;
+    }
+};
