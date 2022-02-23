@@ -1,0 +1,33 @@
+Node* insertionSort(struct Node* head_ref)
+    {
+        Node* temp=head_ref;
+        deque<int> q;
+        q.push_back(temp->data);
+        temp=temp->next;
+        while(temp!=NULL){
+            stack<int> s;
+            if(q.back()>temp->data){
+                while(!q.empty() && q.back()>temp->data){
+                    s.push(q.back());
+                    q.pop_back();
+                }
+                q.push_back(temp->data);
+                while(!s.empty()){
+                    q.push_back(s.top());
+                    s.pop();
+                }
+            }
+            else if(q.back()<=temp->data){
+                q.push_back(temp->data);
+            }
+            temp=temp->next;
+        }
+        Node* dummy=new Node(-1);
+        Node* ans=dummy;
+        while(!q.empty()){
+            ans->next=new Node(q.front());
+            ans=ans->next;
+            q.pop_front();
+        }
+        return dummy->next;
+    }
