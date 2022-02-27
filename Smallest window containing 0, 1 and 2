@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    int smallestSubstring(string S) {
+        int prevOne = -1, prevTwo = -1, prevZero = -1;
+        int ans = INT_MAX;
+        for(int i=0; i < S.length(); i++) {
+            char ch = S[i];
+            if(ch == '1') {
+                prevOne = i;
+            } else if(ch == '2') prevTwo = i;
+            else if(ch == '0') prevZero = i;
+            
+            if(prevOne == -1 || prevTwo == -1 || prevZero == -1) continue;
+            else {
+                
+                int maxDis = min({ prevOne, prevTwo, prevZero });
+                ans = min(ans, i - maxDis + 1);
+            }
+        }
+        
+        return (ans == INT_MAX) ? -1 : ans;
+    }
+};
