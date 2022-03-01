@@ -1,0 +1,31 @@
+class Solution{
+    public:
+    long long countPairs(int n, int x, vector<int> nums){
+       map<int,int>mp;
+       long long c=0;
+       for(auto &num:nums)
+            mp[num]++;
+       
+       int back=0;int tail=0;int mul=1;
+       int digits =log10(x);
+       for(int i=0;i<digits;i++){
+           int tail=x%10;
+           back=(tail*mul)+back; mul*=10;
+           x=x/10;
+           if(tail==0)
+             continue;
+
+           if(mp.find(x)!=mp.end()&&mp.find(back)!=mp.end()){
+                if(x==back){
+                     if(mp[x]>1)
+                        c+=(mp[x]*(mp[x]-1));
+                }
+                else{
+                    c+=(mp[x]*mp[back]);
+                }
+              
+             }
+       }
+       return c;
+    }
+}; 
