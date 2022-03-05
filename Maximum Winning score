@@ -1,0 +1,14 @@
+class Solution {
+  public:
+    //Function to return maximum path product from any node in a tree.
+     long long findMaxScore(Node* root)
+    {
+        if(root == NULL) return 1;
+        
+        long long lScore = findMaxScore(root->left);
+        long long rScore = findMaxScore(root->right);
+        
+        
+        return max(lScore*root->data,rScore*root->data);
+    }
+};
