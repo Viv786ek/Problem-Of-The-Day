@@ -1,0 +1,23 @@
+string sevenSegments(string S, int N) {
+        int totalSegments = 0;
+        for(int i=0; i<N; i++){
+            totalSegments += noOfSegments[S[i]-'0'];
+        }
+        string ans = "";
+        for(int i=N-1; i>=0; i--){
+            for(int j=0; j<10; j++){
+                int remSegments = totalSegments-noOfSegments[j];
+                if(remSegments>=2*i && remSegments<=7*i){
+                    //Our Possible answer is betweeen min and max segments that can be formed with remaining positions
+                    // if I take one position, I have N-1 positions
+                    // for N-1 positions, I can have min of 2*(N-1) segments by filling with '1' and max of 7*(N-1) segments by filling with '8'
+                    // If my remSegments lies within that range I can take this char
+                    // One doubt that would come is, Is it always possible that if its lies in that range it is always possible to form. Try on sample string
+                    ans += (char)(j+'0');
+                    totalSegments = remSegments;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
