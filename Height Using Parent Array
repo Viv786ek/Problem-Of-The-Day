@@ -1,0 +1,14 @@
+class Solution{
+public:
+    int findHeight(int N, int a[]){
+        // code here
+            int i=a[N-1];
+      int h=1;
+    
+    while(i !=-1){
+        i=a[i];
+        h++;
+        }
+      return h;
+    }
+};
