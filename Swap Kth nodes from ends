@@ -1,0 +1,51 @@
+void swap(Node* preva, Node* a, Node* prevb, Node* b) {
+     if(a == prevb) {
+         preva->next = b;
+         a->next = b->next;
+         b->next = a;
+     } else if(b == preva) {
+         prevb->next = a;
+         b->next = a->next;
+         a->next = b;
+         
+     } else {
+         
+         Node* aNext = a->next;
+         preva->next = b;
+         prevb->next = a;
+         
+         a->next = b->next;
+         b->next = aNext;
+     }
+ }
+
+//Function to swap Kth node from beginning and end in a linked list.
+Node *swapkthnode(Node* head, int num, int K)
+{
+    if(K > num) return head;
+  Node* dummy = new Node(-1);
+  dummy->next = head;
+  
+  
+//   find the kth node from the begiing
+    Node* p = head;
+    Node* prev1 = dummy;
+    int cnt = 1;
+    while(cnt < K) {
+        prev1 = p;
+        p = p->next;
+        cnt += 1;
+    }
+    
+    Node* q = head;
+    Node* prev2 = dummy;
+    cnt = 1;
+    while(cnt < (num - K+1)) {
+        prev2 = q;
+        q = q->next;
+        cnt += 1;
+    }
+    
+   swap(prev1, p, prev2, q);
+    return dummy->next;
+}
