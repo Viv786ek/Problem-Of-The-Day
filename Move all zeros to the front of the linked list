@@ -1,0 +1,34 @@
+//User function Template for C++
+/* Linked List Node structure
+struct Node
+{
+    int data;
+    struct Node* next;
+    
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+    
+};
+*/
+// Move Zeros to the front of the list
+void moveZeroes(struct Node **head)
+{
+    //Your code here
+    Node* prev=*head;
+    Node* find=*head;
+    find = find->next;
+    while(find!=NULL){
+        if(find->data == 0){
+            prev->next = find->next;
+            find->next = *head;
+            *head = find;
+            find = prev->next;
+        }
+        else{
+            prev=find;
+            find=find->next;
+        }
+    }
+}
