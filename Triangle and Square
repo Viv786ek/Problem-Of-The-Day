@@ -1,0 +1,7 @@
+int countSquare(int B)
+    {
+	    // code here 
+	    int x = B/2;
+    x--;
+    return (x* (x+1))/2;
+    }
