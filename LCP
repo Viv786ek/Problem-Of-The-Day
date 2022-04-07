@@ -1,0 +1,16 @@
+class Solution{
+public:
+    string LCP(string ar[], int n)
+    {
+        // code here
+         string temp=ar[0];
+       
+       
+       for(int i=1;i<n;i++){
+         while(ar[i].find(temp)!=0){
+             temp = temp.substr(0,temp.length()-1);
+         }
+       }
+       return (temp.length() == 0)?"-1":temp;
+    }
+};
