@@ -1,0 +1,25 @@
+vector<int> print_next_greater_freq(int arr[],int n)
+    {
+        // code here
+        stack<int> st;
+        vector<int> v;
+        unordered_map<int,int> mp;
+        for(int i=0;i<n;i++){
+            mp[arr[i]]++;
+        }
+       
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && mp[arr[st.top()]]<=mp[arr[i]]){
+                st.pop();
+            }
+            if(st.empty()){
+                v.push_back(-1);
+            }else{
+                v.push_back(arr[st.top()]);
+            }
+            st.push(i);
+            
+        }
+        reverse(v.begin(),v.end());
+        return v;
+    }
