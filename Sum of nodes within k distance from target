@@ -1,0 +1,40 @@
+class Solution{
+public:
+    unordered_map<Node*,Node*> m;
+    unordered_set<Node*> s;
+    Node* tar=NULL;
+    int ans=0;
+    void fun(Node* root,Node* parent,int target)
+    {
+        if(root==NULL)
+        return;
+        if(root->data==target)
+        {
+            tar=root;
+        }
+        m[root]=parent;
+        fun(root->left,root,target);
+        fun(root->right,root,target);
+    }
+    void fun1(Node* root,int k)
+    {
+        if(k<0)
+        return;
+        if(root==NULL)
+        return;
+        if(s.find(root)!=s.end())
+        return;
+        ans+=root->data;
+        s.insert(root);
+        fun1(root->left,k-1);
+        fun1(root->right,k-1);
+        fun1(m[root],k-1);
+    }
+    int sum_at_distK(Node* root, int target, int k)
+    {
+      
+        fun(root,NULL,target);
+        fun1(tar,k);
+        return ans;
+    }
+};
