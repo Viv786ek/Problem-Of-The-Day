@@ -1,0 +1,28 @@
+int solve(int ind ,int n , vector<int>& nums , int k , vector<int>& dp){
+        if(ind >= n )
+        return 0;
+        if(dp[ind] != -1)
+        return dp[ind];
+        int ans = INT_MAX;
+        int sum = 0 ;
+        for(int i = ind ; i < n ; i++){
+            sum += nums[i];
+            if(sum + (i - ind) <=k){
+                int cost = 0;
+                if(i != n - 1){
+                    cost = pow(k - sum - i + ind , 2);
+                }
+                ans = min(ans ,cost + solve(i + 1, n , nums , k , dp));
+              
+            }
+        }
+        return dp[ind] = ans;
+    }
+
+    int solveWordWrap(vector<int>nums, int k) 
+    { 
+        // Code here
+        int n = nums.size() ;
+        vector<int>dp(n , -1);
+        return solve(0 , n , nums , k , dp);
+    } 
