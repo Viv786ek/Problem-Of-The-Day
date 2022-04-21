@@ -1,0 +1,24 @@
+class Solution{
+public:
+    string remove(string s){
+        // code here
+        string ans="";
+        int i=0;
+        while(i<s.length()){
+            char ch = s[i];
+            int freq =0;
+            while(ch == s[i]){
+                freq++;
+                i++;
+            }
+            if(freq==1){
+                ans+=ch;
+            }
+        }
+        if(ans==s){
+            return ans;
+            
+        }
+        return remove(ans);
+    }
+};
