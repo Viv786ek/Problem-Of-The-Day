@@ -1,0 +1,26 @@
+// Solution - 1
+T(N)
+S(N)
+
+int sum(int a , int b)
+    {
+        //code here
+        if(b==0) return a;
+        else return sum(a^b,(unsigned)(a&b)<<1);
+    }
+    
+    
+    // Solution - 2
+    T(N)
+    S(0)
+    
+    int sum(int a , int b)
+    {
+        //code here
+       while(b!=0){
+           int carry = a&b;
+           a^=b;
+           b=carry<<1;
+       }
+       return a;
+    }
