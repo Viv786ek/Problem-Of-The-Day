@@ -1,0 +1,19 @@
+vector<int> candyStore(int candies[], int N, int K)
+    {
+        // Write Your Code here
+        sort(candies,candies+N);
+        int min_cost=0;
+        int max_cost=0;
+        
+        int i=0, j=N-1; // For Minimum Cost 
+        int k=N-1, m=0; // For Maximum Cost
+        while(i<=j){
+            max_cost += candies[k];
+            k--;
+            m+=K;
+            min_cost += candies[i];
+            j -= K;
+            i++;
+        }
+        return {min_cost,max_cost};
+    }
