@@ -1,0 +1,24 @@
+int solve (struct Node *fast, struct Node *slow)
+{
+    int c=1;
+    while(slow!=fast)
+    {
+        slow=slow->next;
+        c++;
+    }
+    return c;
+}
+int countNodesinLoop(struct Node *head)
+{
+    struct Node *fast=head,*slow=head;
+    while(fast->next and fast->next->next)
+    {
+        slow =slow->next;
+        fast=fast->next->next;
+        if(fast==slow) 
+        {
+            return solve(fast,slow->next);
+        }
+    }
+    return 0;
+}
