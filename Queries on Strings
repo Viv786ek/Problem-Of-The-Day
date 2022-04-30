@@ -1,0 +1,18 @@
+vector<int>SolveQueris(string str, vector<vector<int>>Query){
+
+vector<int> dp[26];
+    for(int i = 0;i<str.size();i++) dp[str[i]-'a'].push_back(i+1);
+    
+    vector<int>res;
+    for(auto a : Query){
+        int ct = 0;
+        for(int i =0;i<26;i++){
+            if(dp[i].size() == 0) continue;
+            auto t = lower_bound(dp[i].begin(), dp[i].end(), a[0]);
+            if(*t >= a[0] && *t <= a[1]) ct++;
+        }
+        res.push_back(ct);
+    }
+    return res;
+	    
+	}
